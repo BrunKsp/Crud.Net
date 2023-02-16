@@ -7,3 +7,5 @@ namespace CrudApi.Models
         public DateTime data { get; set; }
     }
 }
+ //"ConnectionStrings": {
+   // "ServerConnection" :"Server=(localdb)\\mssqllocaldb;Database=master;Trusted_Connection =True; MultipleActiveResultSets = True" },

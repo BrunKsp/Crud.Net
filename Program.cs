@@ -13,9 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddDbContext<ProdutosContext>(opt => opt.UseInMemoryDatabase("ProdutoDB"));
+builder.Services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
     
-builder.Services.AddDbContext<ProdutosContext>(options =>  options.UseSqlServer(builder.Configuration.GetConnectionString("ServerConnection")));
+//builder.Services.AddDbContext<ProdutosContext>(options =>  options.UseSqlServer(builder.Configuration.GetConnectionString("ServerConnection")));
 
 var app = builder.Build();
 
@@ -23,7 +24,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(
+        c=> {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Todo api v1");
+            c.RoutePrefix= string.Empty;
+        }
+    );
 }
 
 app.UseHttpsRedirection();

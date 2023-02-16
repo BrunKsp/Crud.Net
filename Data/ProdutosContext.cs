@@ -15,7 +15,7 @@ namespace CrudApi.Data
         .AddJsonFile("appsettings.json",false , true)
         .Build();
         
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("ServerConnection"));
+        optionsBuilder.LogTo(Console.WriteLine);
         
         }
         public DbSet <Produtos> Produtos {get;set;}
